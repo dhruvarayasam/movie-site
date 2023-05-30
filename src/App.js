@@ -15,12 +15,15 @@ function App() {
     const searchMovies = async (title) => {
 
         const response = await fetch(`${API_URL}&s=${title}`).catch(err => {
+
+            console.log('error hit')
+
             return (<div className="empty">
                 <h2>API Error, come back later ☹️</h2>
             </div>)
         })
 
-        const data = response.json();
+        const data = await response.json();
 
         console.log(data.Search)
 
