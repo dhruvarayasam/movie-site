@@ -4,7 +4,7 @@ import './App.css';
 import SearchIcon from './search.svg';
 import MovieCard from './MovieCard'
 
-const API_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=5fb3764e"
+const API_URL = "https://www.omdbapi.com/?i=tt3896198&apikey=5fb3764e"
 
 function App() {
 
@@ -20,7 +20,7 @@ function App() {
             </div>)
         })
 
-        const data = await response.json();
+        const data = response.json();
 
         console.log(data.Search)
 
