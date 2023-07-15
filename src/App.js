@@ -48,7 +48,7 @@ function App() {
 
     return (
         <div className="app">
-            <h1>Dhruva's Movie Browser</h1>
+            <h1>Movie Browser</h1>
             <div className="search">
                 <input
                     placeholder="search for movies"
