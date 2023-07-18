@@ -39,12 +39,6 @@ function App() {
 
     }
 
-    useEffect(() => {
-
-        searchMovies('');
-
-    }, []);
-
 
     return (
         <div className="app">
