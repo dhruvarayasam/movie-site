@@ -228,3 +228,13 @@ h1 {
     margin: 1rem;
   }
 }
+
+nav {
+  padding: 15px;
+}
+
+.navLink {
+  color: #f9d3b4;
+  padding:10px;
+  text-decoration: none;
+}
