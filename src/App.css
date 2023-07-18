@@ -168,7 +168,7 @@ h1 {
   font-size: 13px;
   letter-spacing: 2px;
   font-weight: 500;
-  color: #f0f0f0;
+  color: #4b2b2b;
 }
 
 .movie div:nth-of-type(3) h3 {
@@ -236,5 +236,14 @@ nav {
 .navLink {
   color: #f9d3b4;
   padding:10px;
+  text-decoration: none;
+}
+
+.movie-title-container {
+  text-align: center;
+}
+
+.movie-title-container > a {
+  color: #f9d3b4;
   text-decoration: none;
 }
