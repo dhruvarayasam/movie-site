@@ -3,27 +3,28 @@ import './App.css';
 import HomeSearch from './components/HomeSearch';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import LetterboxdSignIn from './components/LetterboxdSignIn';
+import FavoritesPage from './components/FavoritesPage';
+import { FavoritesListProvider } from './contexts/ListContext';
 
 function App() {
     return (
         <div>
-            <Routes>
-
-                <Route index element={
-                    <div>
-                        <Navbar />
-                        <HomeSearch/>
-                    </div>
-                }/>
-
-                <Route path="/letterboxdsignin" element={
-                    <div>
-                        <Navbar />
-                        <LetterboxdSignIn />
-                    </div>
-                } />
-            </Routes>
+            <FavoritesListProvider>
+                <Routes>
+                    <Route index element={
+                        <div>
+                            <Navbar />
+                            <HomeSearch/>
+                        </div>
+                    }/>
+                    <Route path="/favorites" element={
+                        <div>
+                            <Navbar />
+                            <FavoritesPage />
+                        </div>
+                    } />
+                </Routes>
+            </FavoritesListProvider>
         </div>
     )
 }

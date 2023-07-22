@@ -239,8 +239,23 @@ nav {
   text-decoration: none;
 }
 
-.movie-title-container {
+.movie {
   text-align: center;
+}
+
+.movie-title-container {
+  display: flex;
+  justify-content: center;
+}
+
+.movie-title-container > * {
+  margin: 5px;
+  float: left;
+}
+
+.movie-title-container img {
+  width:15px;
+  height:20px;
 }
 
 .movie-title-container > a {

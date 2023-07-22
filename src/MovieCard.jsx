@@ -1,4 +1,5 @@
 import React from 'react';
+import PlusSign from './plus-sign.svg'
 
 const MovieCard = ({ movie }) => {
 
@@ -19,6 +20,7 @@ const MovieCard = ({ movie }) => {
             </div>
             <div className="movie-title-container">
                 <a href={imdbLink} target="_blank" rel="noreferrer">{movie.Title}</a>
+                <img src={PlusSign} alt='add'></img>
             </div>
         </div>
     )
