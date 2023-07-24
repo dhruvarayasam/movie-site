@@ -263,13 +263,8 @@ nav {
   text-decoration: none;
 }
 
-.favorites-heading {
-  text-align: center;
-}
-
 .all-lists {
   display:flex;
-
 }
 
 .lists {

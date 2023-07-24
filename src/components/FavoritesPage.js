@@ -134,13 +134,16 @@ export default function FavoritesPage() {
 
     // now in html, we must iterate through all keys in favoriteList object, assign these as FOLDERS
     // under each folder, render each movie w/ its respective title 
+
+    const isFavoritesEmpty = Object.keys(favoritesList).length > 0
+
     return (
         <div>
-            <div className="favorites-heading">
-                <h1>FAVORITES</h1>
-            </div>
+            <center>
+                <h1>Favorites</h1>
+            </center>
             <div className="all-lists">
-                {
+                {isFavoritesEmpty && (
                     Object.entries(favoritesList).map((collection) => {
                         const folderName = collection[0]
                         const moviesList = collection[1]
@@ -163,7 +166,12 @@ export default function FavoritesPage() {
                             </div>
                         )
                     })
+                )
                 }
+
+                {!isFavoritesEmpty && (
+                    <button>plus</button>
+                )}
             </div >
         </div>
     )
