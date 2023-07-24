@@ -262,3 +262,22 @@ nav {
   color: #f9d3b4;
   text-decoration: none;
 }
+
+.favorites-heading {
+  text-align: center;
+}
+
+.all-lists {
+  display:flex;
+
+}
+
+.lists {
+  padding: 15px;
+  color:rgba(249, 211, 180, 1);
+}
+
+.movies-folder-object > * {
+  text-decoration: none;
+  color: white;
+}
