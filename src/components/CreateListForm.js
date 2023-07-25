@@ -20,11 +20,11 @@ export default function CreateListForm() {
 
             setFavoritesList({ ...favoritesList, ...objToAdd })
 
-            console.log(favoritesList)
-
         } else {
 
-            throw new Error('list already exists')
+            console.log(favoritesList)
+
+            alert('folder already exists, try again')
 
         }
 
@@ -32,7 +32,7 @@ export default function CreateListForm() {
 
     return (
         <div>
-            <h3>Create a folder: </h3>
+            <h3 className="lists">Create a folder: </h3>
             <form onSubmit={addFolder}>
                 <input
                     type="text"

@@ -118,8 +118,8 @@ export default function FavoritesPage() {
             <center>
                 <h1>Favorites</h1>
             </center>
+            <CreateListForm />
             <div className="all-lists">
-                <CreateListForm />
                 {
                 Object.entries(favoritesList).map((collection) => {
                     const folderName = collection[0]
