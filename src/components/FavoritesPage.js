@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { FavoritesContext } from "../contexts/ListContext"
 import { checkIfFolderAlreadyExists, checkIfMovieAlreadyExists } from "../checks"
+import CreateListForm from "./CreateListForm"
 
 
 
@@ -112,43 +113,37 @@ export default function FavoritesPage() {
     // now in html, we must iterate through all keys in favoriteList object, assign these as FOLDERS
     // under each folder, render each movie w/ its respective title 
 
-    const isFavoritesEmpty = Object.keys(favoritesList).length > 0
-
     return (
         <div>
             <center>
                 <h1>Favorites</h1>
             </center>
             <div className="all-lists">
-                {isFavoritesEmpty && (
-                    Object.entries(favoritesList).map((collection) => {
-                        const folderName = collection[0]
-                        const moviesList = collection[1]
-                        return (
-                            <div className="lists">
-                                <h4>{folderName}</h4>
-                                <div className="movies-folder">
-                                    {
-                                        moviesList.map((movieArr) => {
-                                            const imdbLink = `http://imdb.com/title/${movieArr[1]}`
-                                            const movieTitle = movieArr[0]
-                                            return (
-                                                <div className="movies-folder-object">
-                                                    <a href={imdbLink} target="_blank" rel="noreferrer">{movieTitle}</a>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
+                <CreateListForm />
+                {
+                Object.entries(favoritesList).map((collection) => {
+                    const folderName = collection[0]
+                    const moviesList = collection[1]
+                    return (
+                        <div className="lists">
+                            <h4>{folderName}</h4>
+                            <div className="movies-folder">
+                                {
+                                    moviesList.map((movieArr) => {
+                                        const imdbLink = `http://imdb.com/title/${movieArr[1]}`
+                                        const movieTitle = movieArr[0]
+                                        return (
+                                            <div className="movies-folder-object">
+                                                <a href={imdbLink} target="_blank" rel="noreferrer">{movieTitle}</a>
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
-                        )
-                    })
-                )
+                        </div>
+                    )
+                })
                 }
-
-                {!isFavoritesEmpty && (
-                    <button>plus</button>
-                )}
             </div >
         </div>
     )

@@ -17,6 +17,7 @@ function App() {
                             <HomeSearch/>
                         </div>
                     }/>
+
                     <Route path="/favorites" element={
                         <div>
                             <Navbar />
