@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { FavoritesContext } from "../contexts/ListContext"
+import { checkIfFolderAlreadyExists, checkIfMovieAlreadyExists } from "../checks"
 
 
 
@@ -102,30 +103,6 @@ export default function FavoritesPage() {
         } else {
             return new Error('folder doesnt exist')
         }
-
-    }
-
-    function checkIfMovieAlreadyExists(list, imdbID) {
-
-        for (let i = 0; i < list.length; i++) {
-
-            const movie = list[i]
-
-            const id = movie[1]
-
-            if (id === imdbID) {
-                return false
-            }
-
-        }
-
-        return true
-
-    }
-
-    function checkIfFolderAlreadyExists(listName) {
-
-        return favoritesList.hasOwnProperty(listName)
 
     }
 
