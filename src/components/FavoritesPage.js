@@ -1,7 +1,8 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { FavoritesContext } from "../contexts/ListContext"
-import { checkIfFolderAlreadyExists, checkIfMovieAlreadyExists } from "../checks"
+import { checkIfFolderAlreadyExists, checkIfMovieAlreadyExists } from "../usefulFuncs"
 import CreateListForm from "./CreateListForm"
+import Cookies from "js-cookie"
 
 
 
@@ -17,9 +18,12 @@ export default function FavoritesPage() {
     // updates to favoritesList include: appending to a list (folder), deleting from a list, and deleting a folder
     // can't add any duplicates to a list
 
-    function deleteFromFolder(folder, imdbID) {
+    function deleteFromFolder(ev) {
 
-        const listOfMovies = [...favoritesList[folder]]
+        const [folderName, imdbID] = ev.target.value.split(',')
+
+        // get movies in the folder
+        const listOfMovies = favoritesList[folderName]
 
         for (let i = 0; i < listOfMovies.length; i++) {
 
@@ -31,7 +35,7 @@ export default function FavoritesPage() {
 
                 const newObj = { ...favoritesList }
 
-                newObj[folder].splice(i, 1);
+                newObj[folderName].splice(i, 1);
 
                 setFavoritesList({ ...newObj })
 
@@ -49,63 +53,23 @@ export default function FavoritesPage() {
 
     }
 
-    function addToFolder(folder, movieTitle, imdbID) {
+    function deleteFolder(ev) {
 
-        const listOfMovies = [...favoritesList[folder]] // 2D Array
+        const listName = ev.target.value
 
-        if (!checkIfMovieAlreadyExists(listOfMovies, imdbID)) { // if movie does not exist in the list, it is safe to add to the list
+        const newObj = { ...favoritesList }
 
-            const newObj = { ...favoritesList }
-            newObj[folder] = [movieTitle, imdbID]
+        delete newObj[listName]
 
-            // now, newObj is instantiated with all previous data of favoritesList as well as new movie. now, update state
-
-            setFavoritesList({ ...newObj })
-
-        } else {
-
-            throw new Error('movie exists')
-
-        }
-    }
-
-    function addFolder(listName) {
-
-        if (!checkIfFolderAlreadyExists) {
-
-            const objToAdd = {}
-            objToAdd[listName] = []
-
-            setFavoritesList({ ...favoritesList, ...objToAdd })
-
-            console.log(favoritesList)
-
-        } else {
-
-            throw new Error('list already exists')
-
-        }
+        setFavoritesList({ ...newObj })
 
     }
 
-    function deleteFolder(listName) {
-
-        if (checkIfFolderAlreadyExists(listName)) {
-
-            const newObj = { ...favoritesList }
-
-            delete newObj[listName]
-
-            setFavoritesList({ ...newObj })
-
-            console.log(favoritesList)
-
-
-        } else {
-            return new Error('folder doesnt exist')
-        }
-
-    }
+    useEffect(() => { // updates cookies whenever favoritesList updates
+        console.log(favoritesList)
+        const stringData = JSON.stringify(favoritesList)
+        Cookies.set('favoritesList', stringData)
+    }, [favoritesList])
 
     // make favoritesList into a renderable array
 
@@ -118,31 +82,38 @@ export default function FavoritesPage() {
             <center>
                 <h1>Favorites</h1>
             </center>
-            <CreateListForm />
+            <div className="create-folder-form-title">
+                <h3>Create List: </h3>
+                <CreateListForm />
+            </div>
             <div className="all-lists">
                 {
-                Object.entries(favoritesList).map((collection) => {
-                    const folderName = collection[0]
-                    const moviesList = collection[1]
-                    return (
-                        <div className="lists">
-                            <h4>{folderName}</h4>
-                            <div className="movies-folder">
-                                {
-                                    moviesList.map((movieArr) => {
-                                        const imdbLink = `http://imdb.com/title/${movieArr[1]}`
-                                        const movieTitle = movieArr[0]
-                                        return (
-                                            <div className="movies-folder-object">
-                                                <a href={imdbLink} target="_blank" rel="noreferrer">{movieTitle}</a>
-                                            </div>
-                                        )
-                                    })
-                                }
+                    Object.entries(favoritesList).map((collection) => {
+                        const folderName = collection[0]
+                        const moviesList = collection[1]
+                        return (
+                            <div className="folder-row">
+                                <div className="lists">
+                                    <h4>{folderName}<button className="delete-button" value={folderName} onClick={deleteFolder}>X</button></h4>
+                                    <div className="movies-folder">
+                                        {
+                                            moviesList.map((movieArr) => {
+                                                const imdbID = movieArr[1]
+                                                const imdbLink = `http://imdb.com/title/${imdbID}`
+                                                const movieTitle = movieArr[0]
+                                                return (
+                                                    <div className="movies-folder-object">
+                                                        <a href={imdbLink} target="_blank" rel="noreferrer">{movieTitle}</a>
+                                                        <button className="delete-button" value={[folderName, imdbID]} onClick={deleteFromFolder}>X</button>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    )
-                })
+                        )
+                    })
                 }
             </div >
         </div>

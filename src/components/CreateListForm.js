@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { FavoritesContext } from "../contexts/ListContext";
-import { checkIfFolderAlreadyExists } from "../checks";
+import { checkIfFolderAlreadyExists } from "../usefulFuncs";
 
 
 export default function CreateListForm() {
@@ -9,8 +9,7 @@ export default function CreateListForm() {
     const {favoritesList, setFavoritesList} = useContext(FavoritesContext)
     const [folderName, setFolderName] = useState('')
 
-    function addFolder(ev) {
-
+    function addFolder(ev) { // ADD PROVISION TO CHECK FOR COMMAS: NO COMMAS ALLOWED IN FOLDER TITLES
         ev.preventDefault()
 
         if (!checkIfFolderAlreadyExists(folderName, favoritesList)) {
@@ -19,6 +18,7 @@ export default function CreateListForm() {
             objToAdd[folderName] = []
 
             setFavoritesList({ ...favoritesList, ...objToAdd })
+
 
         } else {
 
@@ -30,9 +30,13 @@ export default function CreateListForm() {
 
     }
 
+    // useEffect(() => { // updates cookies whenever favoritesList updates
+    //     const stringData = JSON.stringify(favoritesList)
+    //     Cookies.set('favoritesList', stringData)
+    // }, [favoritesList])
+
     return (
-        <div>
-            <h3 className="lists">Create a folder: </h3>
+        <div className="create-form">
             <form onSubmit={addFolder}>
                 <input
                     type="text"
@@ -41,7 +45,7 @@ export default function CreateListForm() {
                     onChange={(e) => {setFolderName(e.target.value)}}
 
                 ></input>
-                <button>Submit</button>
+                <button className="generic-button-style">Create</button>
             </form>
         </div>
     )

@@ -1,10 +1,22 @@
 import { createContext, useState } from "react";
+import Cookies from "js-cookie";
+import { json } from "react-router-dom";
 
 export const FavoritesContext = createContext({})
 
 export function FavoritesListProvider({children}) {
 
-    const [favoritesList, setFavoritesList] = useState({});
+    // set initial value of favoritesList to favoritesList cookie; if no cookie exists, then instantiate the cookie and favoritesList context to empty object
+
+    if (Cookies.get('favoritesList') === undefined) {
+        Cookies.set('favoritesList', {})
+    }
+
+    const initialValue = JSON.parse(Cookies.get('favoritesList'))
+
+    console.log(initialValue)
+
+    const [favoritesList, setFavoritesList] = useState(initialValue);
 
     return (
         <FavoritesContext.Provider value={{favoritesList, setFavoritesList}}>

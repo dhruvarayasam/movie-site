@@ -1,7 +1,9 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import SearchIcon from '../search.svg'
 import MovieCard from '../MovieCard'
+import { FavoritesContext } from '../contexts/ListContext';
+import Cookies from 'js-cookie';
 
 
 const API_URL = "https://www.omdbapi.com/?i=tt3896198&apikey=5fb3764e"

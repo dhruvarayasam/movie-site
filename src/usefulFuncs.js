@@ -1,6 +1,6 @@
 
 
-export function checkIfMovieAlreadyExists(list, imdbID) {
+export function checkIfMovieAlreadyExists(list, imdbID) { // if true, movie exists in list
 
     for (let i = 0; i < list.length; i++) {
 
@@ -9,12 +9,12 @@ export function checkIfMovieAlreadyExists(list, imdbID) {
         const id = movie[1]
 
         if (id === imdbID) {
-            return false
+            return true
         }
 
     }
 
-    return true
+    return false
 
 }
 

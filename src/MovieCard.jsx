@@ -9,7 +9,7 @@ const MovieCard = ({ movie }) => {
     console.log(movie)
 
     return (
-        <div>
+        <div className="movie-search-object">
             <div className="movie">
                 <div>
                     <p>{movie.Year}</p>
