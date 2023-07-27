@@ -8,7 +8,7 @@ export function FavoritesListProvider({children}) {
     // set initial value of favoritesList to favoritesList cookie; if no cookie exists, then instantiate the cookie and favoritesList context to empty object
 
     if (Cookies.get('favoritesList') === undefined) {
-        Cookies.set('favoritesList', {})
+        Cookies.set('favoritesList', JSON.stringify({}))
     }
 
     const initialValue = JSON.parse(Cookies.get('favoritesList'))
