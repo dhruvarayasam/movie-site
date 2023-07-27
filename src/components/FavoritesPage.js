@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react"
 import { FavoritesContext } from "../contexts/ListContext"
-import { checkIfFolderAlreadyExists, checkIfMovieAlreadyExists } from "../usefulFuncs"
 import CreateListForm from "./CreateListForm"
 import Cookies from "js-cookie"
 
